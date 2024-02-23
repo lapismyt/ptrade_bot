@@ -20,7 +20,7 @@ runs = 0
 def fetch_pool_info():
     try:
         pair_info = gt.network_pool_address("ton", POOL_ADDRESS)
-        return pair_info["attributes"]
+        return pair_info["data"]["attributes"]
     except KeyError as err:
         print(repr(err))
         print(pair_info)
