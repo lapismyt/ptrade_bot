@@ -18,8 +18,12 @@ volumes = []
 runs = 0
 
 def fetch_pool_info():
-    pair_info = gt.network_pool_address("ton", POOL_ADDRESS)
-    return pair_info["attributes"]
+    try:
+        pair_info = gt.network_pool_address("ton", POOL_ADDRESS)
+        return pair_info["attributes"]
+    except KeyError as err:
+        print(repr(err))
+        print(pair_info)
 
 def calculate_ma(prices, periods):
     return sum(prices[-periods:]) / periods
