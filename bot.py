@@ -31,8 +31,7 @@ def calculate_ma(prices, periods):
 def calculate_vwap(prices, volumes):
     return sum(price * volume for price, volume in zip(prices, volumes)) / sum(volumes)
 
-def analyze_pnd(price_change_percentage):
-    change_percentage = price_change_percentage["h1"]
+def analyze_pnd(change_percentage):
     if change_percentage > 5:
         return "Sell"
     elif change_percentage < -5:
@@ -62,10 +61,11 @@ def start(bot, wait_time):
     global prices, volumes, runs
     while True:
         info = fetch_pool_info()
-        price_usd = info["base_token_price_usd"]
-        price_quote = info["base_token_price_quote_token"]
-        price_change_percentage = info["price_change_percentage"]
-        volumes.append(info["volume_usd"]["h1"])
+        price_usd = float(info["base_token_price_usd"])
+        price_quote = float(info["base_token_price_quote_token"])
+        price_change_percentage_h1 = info["price_change_percentage"]["h1"]
+        price_change_percentage_h24 = info["price_change_percentage"]["h24"]
+        volumes.append(float(info["volume_usd"]["h1"]))
         prices.append(price_quote)
 
         if runs > 0:
@@ -73,15 +73,15 @@ def start(bot, wait_time):
                 ma_short = calculate_ma(prices, 8)
                 ma_long = calculate_ma(prices, 12)
                 hint_ma = analyze_ma(ma_short, ma_long)
-            hint_pnd = analyze_pnd(price_change_percentage)
+            hint_pnd = analyze_pnd(price_change_percentage_h1)
             hint_vwap = analyze_vwap(prices, volumes)
 
             resp = f"Pool: {info['name']}\n"
             resp += f"Price: {round(price_quote, 4)} (${round(price_usd, 4)})\n\n"
 
             resp += f"Price changes:\n"
-            resp += f"1H: {price_change_percentage['h1']}\n"
-            resp += f"24H: {price_change_percentage['h24']}\n\n"
+            resp += f"1H: {round(price_change_percentage_h1, 2)}\n"
+            resp += f"24H: {round(price_change_percentage_h24, 2)}\n\n"
             
             if runs > 12:
                 resp += f"MA Hint: {hint_ma}\n"
