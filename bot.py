@@ -9,8 +9,7 @@ gt = GeckoTerminalAPI()
 TOKEN = os.environ.get("PTRADE_KEY")
 bot = telebot.TeleBot(TOKEN)
 
-TON_TOKEN_ADDRESS = "EQAaV7Q9M0vrO5HfKrPNnQneXB-S9RyBneMNeX4KzECIYrdk"
-POOL_ADDRESS = "EQA5ieb1PvkulegIa_N06geN0WrdcBT9k34y62qU8yIqqM3b"
+POOL_ADDRESS = os.environ.get("PTRADE_POOL")
 INTERVAL = 3600
 
 prices = []
