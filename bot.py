@@ -63,8 +63,8 @@ def start(bot, wait_time):
         info = fetch_pool_info()
         price_usd = float(info["base_token_price_usd"])
         price_quote = float(info["base_token_price_quote_token"])
-        price_change_percentage_h1 = info["price_change_percentage"]["h1"]
-        price_change_percentage_h24 = info["price_change_percentage"]["h24"]
+        price_change_percentage_h1 = float(info["price_change_percentage"]["h1"])
+        price_change_percentage_h24 = float(info["price_change_percentage"]["h24"])
         volumes.append(float(info["volume_usd"]["h1"]))
         prices.append(price_quote)
 
