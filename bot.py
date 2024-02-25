@@ -82,7 +82,7 @@ def start(bot, wait_time):
             resp += f"1H: {round(price_change_percentage_h1, 2)}\n"
             resp += f"24H: {round(price_change_percentage_h24, 2)}\n\n"
             
-            if runs > 12:
+            if runs > 6:
                 resp += f"MA Hint: {hint_ma}\n"
 
             resp += f"PnD Hint: {hint_pnd}\n"
