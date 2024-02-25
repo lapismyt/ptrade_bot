@@ -68,7 +68,7 @@ def start(bot, wait_time):
         prices.append(price_quote)
 
         if runs > 0:
-            if runs > 6
+            if runs > 6:
                 ma_short = calculate_ma(prices, 2)
                 ma_long = calculate_ma(prices, 6)
                 hint_ma = analyze_ma(ma_short, ma_long)
