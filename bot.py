@@ -10,7 +10,7 @@ TOKEN = os.environ.get("PTRADE_KEY")
 bot = telebot.TeleBot(TOKEN)
 
 POOL_ADDRESS = os.environ.get("PTRADE_POOL")
-INTERVAL = 3600
+INTERVAL = 1800
 
 prices = []
 volumes = []
